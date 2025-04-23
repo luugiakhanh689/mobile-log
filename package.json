@@ -2,7 +2,7 @@
   "name": "mui-log-viewer-ui",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://luugiakhanh689.github.io/mobile-log", // 👈 Add this line
+  "homepage": "https://luugiakhanh689.github.io/mobile-log",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
