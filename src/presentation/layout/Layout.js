@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Toolbar } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import LogsTab from '../tabs/LogsTab';
@@ -13,11 +14,12 @@ const miniWidth = 72;
 export default function Layout() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [tab, setTab] = React.useState(0);
+  const logs = useSelector(state => state.logs.data);
 
   const renderTab = () => {
     switch (tab) {
       case 0: return <LogsTab />;
-      case 1: return <AnalyticsTab />;
+      case 1: return <AnalyticsTab logs={Object.values(logs).flat()} />;
       case 2: return <UserManagerTab />;
       case 3: return <SettingsTab />;
       default: return null;
@@ -26,7 +28,6 @@ export default function Layout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* Sidebar fixed */}
       <Box
         sx={{
           width: drawerOpen ? drawerWidth : miniWidth,
@@ -39,7 +40,6 @@ export default function Layout() {
         <Sidebar drawerOpen={drawerOpen} tab={tab} setTab={setTab} />
       </Box>
 
-      {/* Main content + topbar */}
       <Box
         sx={{
           ml: drawerOpen ? `${drawerWidth}px` : `${miniWidth}px`,
@@ -48,7 +48,7 @@ export default function Layout() {
         }}
       >
         <Topbar drawerOpen={drawerOpen} toggleDrawer={() => setDrawerOpen(!drawerOpen)} tab={tab} />
-        <Toolbar /> {/* spacing để không đè nội dung */}
+        <Toolbar />
         <Box sx={{ p: 3 }}>
           {renderTab()}
         </Box>
